@@ -529,7 +529,6 @@ body.scrolled .search-row {
 /* ========== Type row responsive ========== */
 @media (max-width: 640px) {
   .types {
-    justify-content: flex-start; /* 左寄せにして自然な流れ */
     gap: 6px;
     margin-bottom: 8px;
   }
