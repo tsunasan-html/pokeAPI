@@ -471,20 +471,32 @@ body.scrolled .search-row {
 }
 
 /* Image area */
+@media (min-width: 767px) {
+  .image-wrap {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+}
 .image-wrap {
   display: grid;
   place-items: center;
   background: radial-gradient(300px 140px at 50% 20%, #1a2030, #0f1320);
   border-radius: 12px;
-  padding: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
+  padding: 3px;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
 }
+
 .image-wrap img {
   width: 150px;
-  height: 150px;
+ 
   object-fit: contain;
   filter: drop-shadow(0 8px 10px rgba(0,0,0,.45));
+}
+@media (min-width: 768px) {
+  .image-wrap img {
+    height: 150px;
+  }
 }
 @media (max-width: 767px) {
     .image-wrap img {
@@ -576,7 +588,7 @@ body.scrolled .search-row {
 
 /* ===== Stats bars: responsive ===== */
 @media (max-width: 640px) {
-  .stats { gap: 6px; }
+  .stats { gap: 3px; }
 
   .stat {
     grid-template-columns: 28px 1fr; /* ラベル幅を少し詰める */
