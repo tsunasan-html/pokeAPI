@@ -400,8 +400,8 @@ body.scrolled .search-row {
 /* ========== Grid ========== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); /* 15rem ≒ 240px */
-  gap: 1.5rem; /* 24px相当（環境依存） */
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.5rem;
 }
 
 /* ========== Card (Poké Card style) ========== */
@@ -447,6 +447,29 @@ body.scrolled .search-row {
 .card-header .name { letter-spacing: .3px; }
 .card-header .hp { color: var(--gold); }
 
+/* ========== Card Header Responsive (横並び維持) ========== */
+@media (max-width: 640px) {
+  .card-header {
+    justify-content: space-between; /* 横のままバランスを維持 */
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .card-header .name {
+    font-size: 14px;          /* 少し小さくして詰まり防止 */
+    max-width: 70%;           /* 長い名前がはみ出さないように */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  /* 長い名前は「…」で省略 */
+  }
+
+  .card-header .hp {
+    font-size: 13px;          /* バランスよく縮小 */
+    color: var(--gold);
+    flex-shrink: 0;           /* HPが潰れないように固定 */
+  }
+}
+
 /* Image area */
 .image-wrap {
   display: grid;
@@ -462,6 +485,12 @@ body.scrolled .search-row {
   height: 150px;
   object-fit: contain;
   filter: drop-shadow(0 8px 10px rgba(0,0,0,.45));
+}
+@media (max-width: 767px) {
+    .image-wrap img {
+  width: 100%;
+}
+
 }
 
 /* Types & id row */
@@ -485,6 +514,25 @@ body.scrolled .search-row {
 }
 .id { color: var(--muted); font-variant-numeric: tabular-nums; }
 
+/* ========== Type row responsive ========== */
+@media (max-width: 640px) {
+  .types {
+    justify-content: flex-start; /* 左寄せにして自然な流れ */
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .type {
+    font-size: 11px;          /* 少し小さく */
+    padding: 3px 6px;         /* コンパクトに */
+    border-radius: 8px;       /* 丸みを少し抑えると詰まりにくい */
+  }
+
+  /* タグが2段になったときの隙間を詰める */
+  .id {
+    font-size: 11px;
+  }
+}
 /* Type tints (rough) */
 .type[data-type="fire"]      { background:#281a1a; border-color:#6d2a2a; }
 .type[data-type="water"]     { background:#1a2230; border-color:#2c4970; }
@@ -526,6 +574,31 @@ body.scrolled .search-row {
   background: linear-gradient(90deg, #6ea8ff, #eabe5c);
 }
 
+/* ===== Stats bars: responsive ===== */
+@media (max-width: 640px) {
+  .stats { gap: 6px; }
+
+  .stat {
+    grid-template-columns: 28px 1fr; /* ラベル幅を少し詰める */
+    gap: 6px;
+    min-width: 0;                    /* はみ出し防止 */
+  }
+
+  .stat label {
+    font-size: 10px;                 /* 11px -> 10px */
+    line-height: 1.2;
+    white-space: nowrap;             /* 改行で崩れないように */
+  }
+
+  .bar {
+    height: 6px;                     /* 8px -> 6px で密度UP */
+    border-radius: 999px;
+  }
+
+  .bar span {
+    border-radius: 999px;
+  }
+}
 /* Buttons (future use) */
 .actions { display: grid; place-items: center; margin-top: 16px; }
 .btn {
@@ -541,10 +614,13 @@ body.scrolled .search-row {
 
 /* ========== Responsive tweaks ========== */
 @media (max-width: 640px) {
-  .title { font-size: 24px; }
-  .grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
-  .search-row { gap: 12px; }
-}/* ========== Load More Actions / Button ========== */
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2列固定 */
+    gap: 1rem;
+  }
+}
+
+/* ========== Load More Actions / Button ========== */
 .actions {
   display: flex;
   justify-content: center;
