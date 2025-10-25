@@ -392,17 +392,35 @@ body.scrolled .search-row {
     flex-direction: column;
     align-items: stretch;
     gap: 0.75rem;
-    padding: 10px 12px;
+    padding: 12px 14px;       /* 余白少し広げて押しやすく */
+    min-height: 56px;         /* 行の高さを確保 */
   }
+
   .search {
     width: 100%;
     max-width: none;
+    font-size: 16px;          /* ★ iOSのズーム防止 */
+    line-height: 1.3;
+    padding: 12px 14px;       /* タップ領域を広く */
+    border-radius: 12px;
   }
+
+  .search::placeholder {
+    font-size: 15px;          /* プレースホルダーも見やすく */
+    opacity: 0.8;
+  }
+
   .meta {
     order: -1;
     text-align: center;
     margin-top: 4px;
+    font-size: 1rem;          /* 少し文字を大きく */
   }
+}
+
+/* Safariの自動テキスト拡大防止 */
+html, body {
+  -webkit-text-size-adjust: 100%;
 }
 
 .meta.error { color: #ff6b6b; }
@@ -661,7 +679,7 @@ body.scrolled .search-row {
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2列固定 */
-    gap: 1rem;
+    gap: .8rem;
   }
 }
 
