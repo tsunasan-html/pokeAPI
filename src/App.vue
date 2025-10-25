@@ -196,7 +196,7 @@ body {
   --bg: #0b0c10;
   background: radial-gradient(1200px 600px at 10% 0%, #0e1322 0%, var(--bg) 60%);
   margin: 0;
-  padding: 4px;
+  padding: 0px;
 }
 
 @media (min-width: 768px) {
@@ -306,8 +306,36 @@ body {
   letter-spacing: .5px;
   margin-top: 6px;
 }
+/* ===== Header Responsive ===== */
+@media (max-width: 640px) {
+  .header {
+    margin-bottom: 24px; /* 少し余白を詰める */
+    gap: 6px;
+  }
 
-/* ========== Search Row ========== */
+  .title-wrap {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1.4rem;     /* 30px → 22px */
+    gap: 4px;
+    letter-spacing: 0.8px;
+  }
+
+  .poke-icon {
+    width: 1em;          /* 少し小さく */
+    height: 1em;
+    transform: translateY(0.05em);
+  }
+
+  .subtitle {
+    font-size: 11.5px;   /* 13px → 11.5px */
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+}
+
 /* ========== Search Row (Fixed) ========== */
 .search-row {
   position: sticky;
@@ -434,6 +462,12 @@ body.scrolled .search-row {
   background: var(--panel);
   border-radius: 16px;
   padding: 14px;
+}
+/* ===== Card Frame Responsive ===== */
+@media (max-width: 640px) {
+  .card-frame {
+    padding: 10px;          /* 14px → 10px に調整 */
+  }
 }
 
 /* Header inside card */
