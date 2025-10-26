@@ -46,19 +46,19 @@
             <div class="stat">
               <label>ATK</label>
               <div class="bar">
-                <span :style="{ width: pokemon.atk + '%' }"></span>
+                <span :style="{ width: Math.min(pokemon.atk, 100) + '%' }"></span>
               </div>
             </div>
             <div class="stat">
               <label>DEF</label>
               <div class="bar">
-                <span :style="{ width: pokemon.def + '%' }"></span>
+                 <span :style="{ width: Math.min(pokemon.def, 100) + '%' }"></span>
               </div>
             </div>
             <div class="stat">
               <label>SPD</label>
               <div class="bar">
-                <span :style="{ width: pokemon.spd + '%' }"></span>
+                <span :style="{ width: Math.min(pokemon.spd, 100) + '%' }"></span>
               </div>
             </div>
           </div>
@@ -435,8 +435,19 @@ html, body {
   font-weight: 600;
   letter-spacing: 0.5px;
   text-align: center;
-  text-shadow: 0 0 10px rgba(255,107,107,0.3);
+  text-shadow: 0 0 4px rgba(255,107,107,0.2);
   animation: fadeIn .4s ease;
+}
+/* ===== No Result (スマホ用) ===== */
+@media (max-width: 640px) {
+  .no-result {
+    min-height: 50vh;            /* 縦を少し圧縮して見切れ防止 */
+    font-size: 1rem;             /* 1.25rem → 1rem に縮小 */
+    line-height: 1.4;            /* 行間をやや詰める */
+    letter-spacing: 0.3px;       /* 詰めても読みやすい */
+    padding: 0 1rem;             /* 横の余白で中央寄せを維持 */
+    text-shadow: 0 0 4px rgba(255,107,107,0.2); /* 光をさらに控えめに */
+  }
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
@@ -643,7 +654,7 @@ html, body {
 
   .stat {
     grid-template-columns: 28px 1fr; /* ラベル幅を少し詰める */
-    gap: 6px;
+    gap: 3px;
     min-width: 0;                    /* はみ出し防止 */
   }
 
@@ -656,6 +667,7 @@ html, body {
   .bar {
     height: 6px;                     /* 8px -> 6px で密度UP */
     border-radius: 999px;
+    overflow: hidden;
   }
 
   .bar span {
@@ -778,7 +790,17 @@ html, body {
 /* モバイルでは全幅にして押しやすく */
 @media (max-width: 640px) {
   .actions { margin-top: 20px; }
-  .btn { width: 100%; min-width: 0; }
+  .btn { 
+    width: 100%;
+    min-width: 0;
+    font-size: 14px;         /* ズーム防止 & 可読性キープ */
+    line-height: 1.3;
+    padding: 12px 14px;      /* ←少しだけ縮めて自然に */
+    border-radius: 12px;
+    gap: 0.6rem;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    touch-action: manipulation;
+  }
 }
 
 /* ユーザーがアニメ抑制設定の場合はアニメ軽減 */
